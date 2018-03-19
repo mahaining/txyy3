@@ -1,0 +1,81 @@
+{#{% extends 'base.html' %}#}
+{% extends 'imdex.html' %}
+{% block hello %}
+    <div class="tpl-content-wrapper">
+        <div class="tpl-content-page-title">
+        </div>
+        <div class="tpl-portlet-components">
+            <div class="portlet-title">
+                <div class="caption font-green bold">
+                    <span class="am-icon-code"></span> 添加测试用用例
+                </div>
+                <div class="tpl-portlet-input tpl-fz-ml">
+                    <div class="portlet-input input-small input-inline">
+                        <div class="input-icon right">
+                        </div>
+                    </div>
+                </div></div>
+            {% with messages = get_flashed_messages()%}
+                {% if messages%}
+                    <ul class='flashes'>
+                        {% for message in messages %}
+                            <li style="color:red">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <form method="POST" action="{{url_for('add_case')}}">
+{#                {{form.hidden_tag()}}#}
+{#                {{form.csrf_token}}#}
+                <div>
+                    <span>&nbsp;</span>
+                    <div class="form-group">
+                        <strong>用户ID</strong>
+                        {{ form.user_id }}</div>
+                    <span>&nbsp;</span>
+                    <div class="form-group">
+                        <strong>手机号:</strong>
+                        {{ form.mobile }}</div>
+                    <span>&nbsp;</span>
+                    <div class="form-group">
+                        <strong>姓名:</strong>
+                        {{ form.real_name }}</div>
+                    <span>&nbsp;</span>
+                    <div class="form-group">
+                        <strong>身份证:</strong>
+                        {{ form.id_card }}</div>
+                    <span>&nbsp;</span>
+                    <div class="form-group" >
+                        <strong>年龄:</strong>
+                        {{ form.age }}</div>
+{#                    <span>&nbsp;</span>#}
+                      <div class="form-group">
+{#                        <table>性别</table>#}
+                        {{ form.sex }}</div>
+{#                    <input type="radio" name="xh" checked value="1">男&nbsp;&nbsp;&nbsp;#}
+{#                    <input type="radio" name="xh" value="0" {{ fr }}>女#}
+                    <span>&nbsp;</span>
+                    <div class="form-group">
+                        <strong>体重:</strong>
+                        {{ form.weight }}</div>
+                    <span>&nbsp;</span>
+                    <div class="form-group">
+                        <strong>身高:</strong>
+                        {{ form.height }}</div>
+                    <span>&nbsp;</span>
+                    <div class="form-group">
+                        <strong>备注:</strong>
+                        {{ form.remark }}</div>
+                    <span>&nbsp;</span>
+                    <div class="form-group" >
+                        <strong>医顾id:</strong>
+                        {{ form.consultant_id }}</div>
+                    <span>&nbsp;</span>
+                    <div class="form-group" >
+                        <strong>第三方ID:</strong>
+                        {{ form.outer_id }}</div>
+                    <button type="submit" class="am-btn am-btn-primary" >添加</button>
+                </div>
+            </form>
+        </div></div>
+{%endblock%}
