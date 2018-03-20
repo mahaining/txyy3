@@ -1,9 +1,10 @@
 from flask_migrate import Migrate,MigrateCommand
-from back2 import app
+from back import app
 from flask_script import Manager
-from exts import db
-import config
-from models import User
+
+from public import config
+from public.exts import db
+
 app.config.from_object(config)
 db.init_app(app)
 
@@ -16,5 +17,3 @@ manager.add_command('db',MigrateCommand)
 
 if __name__ == "__main__":
     manager.run()
-
-

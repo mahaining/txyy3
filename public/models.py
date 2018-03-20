@@ -1,7 +1,7 @@
 import shortuuid
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from exts import db
+from public.exts import db
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.String(100),primary_key=True,default=shortuuid.uuid)

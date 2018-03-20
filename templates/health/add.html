@@ -1,5 +1,5 @@
-{#{% extends 'base.html' %}#}
-{% extends 'imdex.html' %}
+{#{% extends 'public/base.html' %}#}
+{% extends 'public/imdex.html' %}
 {% block hello %}
 <div class="tpl-content-wrapper">
     <div class="tpl-content-page-title">
@@ -7,7 +7,7 @@
     <div class="tpl-portlet-components">
         <div class="portlet-title">
             <div class="caption font-green bold">
-                <span class="am-icon-code"></span> 添加测试用用例
+                <span class="am-icon-code"></span> 添加患者档案
             </div>
             <div class="tpl-portlet-input tpl-fz-ml">
                 <div class="portlet-input input-small input-inline">
@@ -56,8 +56,10 @@
                 </div>
                 <span>&nbsp;</span>
                 <div class="form-group">
-                    <strong>性别</strong>
-                    {{ form.sex }}
+                    <!--<strong>性别</strong>-->
+                    <input id="sex" type="radio" name="sex" value="1">男
+                    <input id="sex1" type="radio" name="sex" value="2">女
+                    <!--{{form.sex}}-->
                 </div>
                 <span>&nbsp;</span>
                 <div class="form-group">
