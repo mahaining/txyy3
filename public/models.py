@@ -40,10 +40,15 @@ class QuestionModel(db.Model):
     weight = db.Column (db.String (200), nullable=False)#体重
     height = db.Column (db.String (200), nullable=False)#身高
     remark = db.Column(db.String(300),nullable=False)#备注
-    consultant_id=db.Column(db.String(30),nullable=False)#医顾id
+    consultant_id=db.Column(db.String(30),db.ForeignKey('health_consultant.id'))#医顾id
     # create_at=db.Column(db.Integer,nullable=False)#创建时间
     # update_at=db.Column(db.Integer,nullable=False)#修改时间
     outer_id=db.Column(db.String(30),nullable=False)#第三方id
     # outer_consultant_id=db.Column(db.Integer,nullable=False)#第三方顾问id
-
     # outer = db.relationship ('User', backref='health_record')
+class Consultant(db.Model):
+    __tablename__='health_consultant'
+    id=db.Column(db.Integer(),primary_key=True)
+    name=db.Column(db.String(),unique=True)
+    def __repr__(self):
+        return  self.name

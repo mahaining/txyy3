@@ -3,7 +3,7 @@ from public.exts import db
 import flask
 from public import config
 from public.froms import RegistForm, Interface_yong_Form
-from public.models import User, QuestionModel
+from public.models import User, QuestionModel, Consultant
 from sqlalchemy import or_
 from public.fenye import Pagination
 app = Flask (__name__)
@@ -39,6 +39,7 @@ def delete(id):
 @app.route ('/add_case/', methods=['GET', 'POST'])
 def add_case():
     form = Interface_yong_Form ()
+    consultant = Consultant.query.all ()
     if request.method == 'POST':
         # id = request.form.get ('id')
         user_id = request.form.get ('user_id')
@@ -50,7 +51,8 @@ def add_case():
         weight = request.form.get ('weight')
         height = request.form.get ('height')
         remark = request.form.get ('remark')
-        consultant_id = request.form.get ('consultant_id')
+        health_consultant = request.form.get ('consultant')
+        # consultant_id= request.form.get ('consultant_id')
         outer_id = request.form.get ('outer_id')
         try:
             newcase = QuestionModel (
@@ -63,7 +65,8 @@ def add_case():
                 weight=weight,
                 height=height,
                 remark=remark,
-                consultant_id=consultant_id,
+                consultant_id=health_consultant,
+                # consultant_id=consultant_id,
                 outer_id=outer_id
             )
             db.session.add (newcase)
@@ -74,7 +77,8 @@ def add_case():
             db.session.rollback ()
             flash (u'添加用例失败')
             return redirect (url_for ('detail'))
-    return render_template ('health/add.html', form=form)
+    return render_template ('health/add.html', form=form,consultants=consultant)
+    # return render_template ('health/add.html', form=form)
 
 
 @app.route ('/editor/<id>', methods=['GET', 'POST'])

@@ -18,5 +18,5 @@ class Interface_yong_Form(Form):
     weight = StringField (u'体重', [validators.DataRequired ()], render_kw={'placeholder': u'请输入体重'})
     height = StringField (u'身高', [validators.DataRequired ()], render_kw={'placeholder': u'请输入身高'})
     remark = StringField (u'备注', [validators.DataRequired ()], render_kw={'placeholder': u'备注'})
-    consultant_id = StringField (u'第三方ID', [validators.DataRequired ()], render_kw={'placeholder': u'第三方ID'})
+    # consultant_id = StringField (u'第三方ID', [validators.DataRequired ()], render_kw={'placeholder': u'第三方ID'})
     outer_id = StringField(u'ID', [validators.DataRequired()], render_kw={'placeholder': u'id'})

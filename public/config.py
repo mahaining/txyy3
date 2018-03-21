@@ -9,4 +9,4 @@ SQLALCHEMY_DATABASE_URI = DB_URI
 DEBUG=True
 SECRET_KEY = os.urandom(24)
 SQLALCHEMY_ECHO = True
-PageShow=5#这里配置的就是每个页显示多少
+PageShow=30#这里配置的就是每个页显示多少
