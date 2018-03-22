@@ -76,13 +76,13 @@
                     <strong>备注:</strong>
                     {{ form.remark }}
                 </div>
-                 <span>&nbsp;</span>
+                <span>&nbsp;</span>
                 <div class="form-group">
-                    <strong>医顾id:</strong>
+                    <strong>医顾:</strong>
                     <!--{{ form.consultant_id }}-->
                     <select name='consultant'>{%for work in consultants%}
-                        <option value ="{{work.id}}" >{{work.name}}</option>
-                    {%endfor%}
+                        <option value="{{work.id}}">{{work.name}}</option>
+                        {%endfor%}
                     </select>
                 </div>
 

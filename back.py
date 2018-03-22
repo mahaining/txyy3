@@ -6,6 +6,7 @@ from public.froms import RegistForm, Interface_yong_Form
 from public.models import User, QuestionModel, Consultant
 from sqlalchemy import or_
 from public.fenye import Pagination
+
 app = Flask (__name__)
 app.config.from_object (config)
 db.init_app (app)
@@ -15,6 +16,8 @@ db.init_app (app)
 # @login_required
 def index():
     return flask.render_template ('public/imdex.html')
+
+
 @app.route ('/detail/')
 # @login_required
 def detail():
@@ -24,6 +27,7 @@ def detail():
     index_list = resylt[pager_obj.start:pager_obj.end]
     html = pager_obj.page_html ()
     return render_template ('health/detail.html', html=html, index_list=index_list)
+
 
 @app.route ('/delete_case/<id>', methods=['GET', 'POST'])
 def delete(id):
@@ -77,13 +81,14 @@ def add_case():
             db.session.rollback ()
             flash (u'添加用例失败')
             return redirect (url_for ('detail'))
-    return render_template ('health/add.html', form=form,consultants=consultant)
+    return render_template ('health/add.html', form=form, consultants=consultant)
     # return render_template ('health/add.html', form=form)
 
 
 @app.route ('/editor/<id>', methods=['GET', 'POST'])
 def editor(id):
     next = request.headers.get ('Referer')
+    consultant = Consultant.query.all ()
     edit_case = QuestionModel.query.filter_by (id=id).first ()
     if request.method == 'POST':
         user_id = request.form.get ('user_id')
@@ -95,7 +100,8 @@ def editor(id):
         weight = request.form.get ('weight')
         height = request.form.get ('height')
         remark = request.form.get ('remark')
-        consultant_id = request.form.get ('consultant_id')
+        # consultant_id = request.form.get ('consultant_id')
+        health_consultant = request.form.get ('consultant')
         outer_id = request.form.get ('outer_id')
 
         edit_case.user_id = user_id
@@ -107,7 +113,7 @@ def editor(id):
         edit_case.weight = weight
         edit_case.height = height
         edit_case.remark = remark
-        edit_case.consultant_id = consultant_id
+        edit_case.consultant_id = health_consultant
         edit_case.outer_id = outer_id
         try:
             db.session.commit ()
@@ -116,8 +122,8 @@ def editor(id):
         except:
             db.session.rollback ()
             flash (u'编辑失败，请重新编辑！')
-            return render_template ('health/editor.html', edit=edit_case)
-    return render_template ('health/editor.html', edit=edit_case)
+            return render_template ('health/editor.html', edit=edit_case, consultants=consultant)
+    return render_template ('health/editor.html', edit=edit_case, consultants=consultant)
 
 
 @app.route ('/search/')
@@ -128,6 +134,8 @@ def search():
         'index_list': questions
     }
     return flask.render_template ('health/detail.html', **context)
+
+
 @app.route ('/login/', methods=['GET', 'POST'])
 def login():
     if flask.request.method == 'GET':
@@ -183,5 +191,7 @@ def context_processor():
         return {"user": flask.g.user}
     else:
         return {}
+
+
 if __name__ == '__main__':
     app.run ()

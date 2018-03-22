@@ -1,84 +1,93 @@
 {#{% extends 'public/base.html' %}#}
 {% extends 'public/imdex.html' %}
 {%block hello%}
-    <div class="tpl-content-wrapper">
-        <div class="tpl-content-page-title">
-        </div>
-        <div class="tpl-portlet-components">
-            <div class="portlet-title">
-                <div class="caption font-green bold">
-                    <span class="am-icon-code"></span> 编辑患者档案
-                </div>
-                <div class="tpl-portlet-input tpl-fz-ml">
-                    <div class="portlet-input input-small input-inline">
-                        <div class="input-icon right">
-                        </div>
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+    </div>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 编辑患者档案
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                    <div class="input-icon right">
                     </div>
-                </div></div>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <ul class='flashes'>
-                        {% for message in messages %}
-                            <li style="color:red">{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endwith %}
-            <form  action="{{ url_for('editor',id=edit.id) }}" method="POST" >
+                </div>
+            </div>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class='flashes'>
+            {% for message in messages %}
+            <li style="color:red">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('editor',id=edit.id) }}" method="POST">
 
-                <div class="form-group">
-                    <strong>用户ID:</strong>
-                    <input type="tel" name="user_id" value="{{edit.user_id}}" >
-                </div>
-                <span>&nbsp;</span>
-                <div class="form-group">
-                    <strong>手机号:</strong>
-                    <input type="tel" name="mobile" value="{{edit.mobile}}">
-                </div>
-                <span>&nbsp;</span>
-                <div class="form-group">
-                    <strong>姓名:</strong>
-                    <input type="text" name="real_name" value="{{edit.real_name}}">
-                </div>
-                <span>&nbsp;</span>
-                <div class="form-group">
-                    <strong>身份证:</strong>
-                    <input type="text" name="id_card" value="{{edit.id_card}}">
-                </div>
-                <span>&nbsp;</span>
-                <div class="form-group">
-                    <strong>年龄:</strong>
-                    <input type="tel" name="age" value="{{edit.age}}">
-                </div>
-              <div class="form-group">
-                   <strong>性别:</strong>
-                   <input type="text" name="sex" value="{{edit.sex}}">
-               </div>
-               <span>&nbsp;</span>
-               <div class="form-group">
-                    <strong>体重:</strong>
-                    <input type="text" name="weight" value="{{edit.weight}}">
-               </div>
-               <span>&nbsp;</span>
-               <div class="form-group">
-                    <strong>身高:</strong>
-               <input type="tel" name="height" value="{{edit.height}}">
-               </div>
-               <span>&nbsp;</span>
-               <div class="form-group">
-                    <strong>医顾id:</strong>
-                    <input type="tel" name="consultant_id" value="{{edit.consultant_id}}">
-               </div>
-               <span>&nbsp;</span>
-               <div class="form-group">
-                   <strong>备注:</strong>
-                   <input type="text" name="remark" value="{{edit.remark}}">
-               </div>
-               <span>&nbsp;</span>
-               <div class="form-group">
-                    <strong>第三方id:</strong>
-                    <input type="tel" name="outer_id" value="{{edit.outer_id}}">
-               </div>
-                <button type="submit" class="am-btn am-btn-primary">修改</button>
-            </form></div></div>
+            <div class="form-group">
+                <strong>用户ID:</strong>
+                <input type="tel" name="user_id" value="{{edit.user_id}}">
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>手机号:</strong>
+                <input type="tel" name="mobile" value="{{edit.mobile}}">
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>姓名:</strong>
+                <input type="text" name="real_name" value="{{edit.real_name}}">
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>身份证:</strong>
+                <input type="text" name="id_card" value="{{edit.id_card}}">
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>年龄:</strong>
+                <input type="tel" name="age" value="{{edit.age}}">
+            </div>
+            <div class="form-group">
+                <strong>性别:</strong>
+                <!--<input type="text" name="sex" value="{{edit.sex}}">-->
+                <input id="sex" type="radio" name="sex" value="1">男
+                <input id="sex1" type="radio" name="sex" value="2">女
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>体重:</strong>
+                <input type="text" name="weight" value="{{edit.weight}}">
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>身高:</strong>
+                <input type="tel" name="height" value="{{edit.height}}">
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>医顾:</strong>
+                <!--<input type="tel" name="consultant_id" value="{{edit.consultant_id}}">-->
+                <select name='consultant'>{%for work in consultants%}
+                    <option value="{{work.id}}">{{work.name}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>备注:</strong>
+                <input type="text" name="remark" value="{{edit.remark}}">
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>第三方id:</strong>
+                <input type="tel" name="outer_id" value="{{edit.outer_id}}">
+            </div>
+            <button type="submit" class="am-btn am-btn-primary">修改</button>
+        </form>
+    </div>
+</div>
 {%endblock%}
