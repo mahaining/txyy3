@@ -1,5 +1,5 @@
 {#{% extends 'public/base.html' %}#}
-{% extends 'public/imdex.html' %}
+{% extends 'index/index.html' %}
 {% block hello %}
 <div class="tpl-content-wrapper">
     <div class="tpl-content-page-title">
@@ -25,7 +25,7 @@
         </ul>
         {% endif %}
         {% endwith %}
-        <form method="POST" action="{{url_for('add_case')}}">
+        <form method="POST" action="{{url_for('health.add_case')}}">
             {# {{form.hidden_tag()}}#}
             {# {{form.csrf_token}}#}
             <div>

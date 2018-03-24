@@ -1,12 +1,19 @@
+from flask import render_template,session
+from app.public.decorators import login_required
+from app.public.exts import db
+from app.public.froms import RegistForm
+from app.public.models import User
+from . import user
 import flask
-from flask import session, Blueprint, app, render_template
-from public.exts import db
-from public.froms import RegistForm
-from public.models import User
-from flask import Flask
-app = Flask (__name__)
-user1 = Blueprint ('login', __name__)
-@app.route ('/login/', methods=['GET', 'POST'])
+@user.route ('/index')
+# @login_required
+def index():
+    return flask.render_template ('index/index.html')
+@user.route ('/back')
+# @login_required
+def back():
+    return flask.render_template ('public/back.html')
+@user.route ('/', methods=['GET', 'POST'])
 def login():
     if flask.request.method == 'GET':
         return render_template ('login/login.html')
@@ -16,13 +23,13 @@ def login():
         user = User.query.filter_by (telephone=telephone).first ()
         if user and user.check_password (password):
             flask.session['id'] = user.id
-            # flask.g.user = user
-            # return flask.redirect (flask.url_for ('index'))
+            flask.g.user = user
+            return flask.redirect (flask.url_for ('user.index'))
         else:
             return flask.redirect (flask.url_for ('login'))
 
 
-@app.route ('/regist/', methods=['GET', 'POST'])
+@user.route ('/regist/', methods=['GET', 'POST'])
 def regist():
     if flask.request.method == 'GET':
         return flask.render_template ('login/regist.html')
@@ -35,19 +42,19 @@ def regist():
             user = User (telephone=telephone, username=username, password=password)
             db.session.add (user)
             db.session.commit ()
-            return flask.redirect (flask.url_for ('login'))
+            return flask.redirect (flask.url_for ('user.login'))
         else:
             return ('注册失败')
 
 
-@app.route ('/logout/')
+@user.route ('/logout/')
 def logout():
     session.clear ()
     # session.pop('user_id')
-    return flask.redirect (flask.url_for ('login'))
+    return flask.redirect (flask.url_for ('user.login'))
 
 
-@app.before_request
+@user.before_request
 def before_request():
     id = flask.session.get ('id')
     if id:
@@ -55,9 +62,12 @@ def before_request():
         flask.g.user = user
 
 
-@app.context_processor
+@user.context_processor
 def context_processor():
     if hasattr (flask.g, 'user'):
         return {"user": flask.g.user}
     else:
         return {}
+#
+# if __name__ == '__main__':
+#     app.run ()

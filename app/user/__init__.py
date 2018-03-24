@@ -1,2 +1,4 @@
-from  app.user.login import us
-from  app.user import us
+from flask import Blueprint
+user=Blueprint("user",__name__)
+
+import app.user.login

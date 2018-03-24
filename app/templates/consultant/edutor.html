@@ -1,0 +1,54 @@
+{#{% extends 'public/base.html' %}#}
+{% extends 'index/index.html' %}
+{%block hello%}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+    </div>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 修改患者档案
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                    <div class="input-icon right">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class='flashes'>
+            {% for message in messages %}
+            <li style="color:red">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('consultant.editor',id=edit.id) }}" method="POST">
+            <div class="form-group">
+                <strong>姓名:</strong>
+                <input type="tel" name="name" value="{{edit.name}}">
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>手机号:</strong>
+                <input type="tel" name="phone" value="{{edit.phone}}">
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>状态:</strong>
+                <!--<input type="text" name="status" value="{{edit.status}}">-->
+                <input id="status" type="radio" name="status" value="1" checked="{{edit.status == 1}}？'radio':''">正常
+                <input id="status2" type="radio" name="status" value="0" checked="{{edit.status == 0}}？'radio':''">停用
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>第三方ID:</strong>
+                <input type="text" name="outer_id" value="{{edit.outer_id}}">
+            </div>
+            <button type="submit" class="am-btn am-btn-primary">修改</button>
+        </form>
+    </div>
+</div>
+{%endblock%}

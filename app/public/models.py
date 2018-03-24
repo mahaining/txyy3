@@ -1,7 +1,7 @@
 import shortuuid
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from public.exts import db
+from app.public.exts import db
 
 
 class User (db.Model):
@@ -55,6 +55,8 @@ class Consultant (db.Model):
     __tablename__ = 'health_consultant'
     id = db.Column (db.Integer (), primary_key=True)
     name = db.Column (db.String (), unique=True)
-
+    phone = db.Column (db.String (), nullable=False)
+    status = db.Column (db.String (), nullable=False)
+    outer_id = db.Column (db.String (), nullable=False)
     def __repr__(self):
         return self.name

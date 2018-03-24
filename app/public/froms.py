@@ -22,3 +22,8 @@ class Interface_yong_Form (Form):
     remark = StringField (u'备注', [validators.DataRequired ()], render_kw={'placeholder': u'备注'})
     # consultant_id = StringField (u'第三方ID', [validators.DataRequired ()], render_kw={'placeholder': u'第三方ID'})
     outer_id = StringField (u'ID', [validators.DataRequired ()], render_kw={'placeholder': u'id'})
+class Interface_consultant (Form):
+    name = StringField (u'用户ID', [validators.DataRequired ()], render_kw={'placeholder': u'请输入用户ID'})
+    phone = StringField (u'患者手机号', [validators.DataRequired ()], render_kw={'placeholder': u'请输入患者手机号'})
+    status = StringField (u'患者姓名', [validators.DataRequired ()], render_kw={'placeholder': u'请输入患者姓名'})
+    outer_id = StringField (u'患者身份证号码', [validators.DataRequired ()], render_kw={'placeholder': u'请输入 患者身份证号码'})

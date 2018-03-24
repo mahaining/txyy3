@@ -8,6 +8,6 @@ def login_required(func):
         if hasattr (flask.g, 'user'):
             return func (*args, **kwargs)
         else:
-            return flask.redirect (flask.url_for ('login'))
+            return flask.redirect (flask.url_for ('user.login'))
 
     return wrapper
