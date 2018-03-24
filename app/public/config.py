@@ -6,6 +6,7 @@ DATABASE = 'txyy_customer'
 USERNAME = 'tecker'
 PASSWORD = 'tck@2017'
 DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format (USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE)
+print(DB_URI)
 SQLALCHEMY_DATABASE_URI = DB_URI
 DEBUG = True
 SECRET_KEY = os.urandom (24)

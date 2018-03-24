@@ -89,14 +89,14 @@
                             <td>{{ row.weight }}</td>
                             <td>{{ row.height }}</td>
                             <td>{{ row.remark }}</td>
-                            <!--<td>{{ row.consultant_id}}</td>-->
-                            <td>
-                                 <select name='consultant'>
-                                     {%for work in consultants%}
-                                     <option value="{{work.id}}" {%if row.consultant_id == work.id%} selected {%endif%}>{{work.name}}</option>
-                                    {%endfor%}
-                                </select>
-                            </td>
+                            <td>{{ row.health_consultant.name}}</td>
+                            <!--<td>-->
+                                 <!--<select name='consultant'>-->
+                                     <!--{%for work in consultants%}-->
+                                     <!--<option value="{{work.id}}" {%if row.consultant_id == work.id%} selected {%endif%}>{{work.name}}</option>-->
+                                    <!--{%endfor%}-->
+                                <!--</select>-->
+                            <!--</td>-->
                             <td>{{ row.outer_id }}</td>
                         </tr>
                     {% endfor %}

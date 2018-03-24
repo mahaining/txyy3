@@ -11,13 +11,14 @@ from . import health
 @health.route ('/detail/')
 # @login_required
 def detail():
-    consultant = Consultant.query.all ()
+    # consultant = Consultant.query.all ()
     resylt = QuestionModel.query.all ()
+    # resylt = QuestionModel.query.join(Consultant).filter( QuestionModel.consultant_id == Consultant.id)
     pager_obj = Pagination (request.args.get ("page", 1), len (resylt), request.path, request.args,
                             per_page_count=config.PageShow)
     index_list = resylt[pager_obj.start:pager_obj.end]
     html = pager_obj.page_html ()
-    return render_template ('health/detail.html', html=html, index_list=index_list,consultants=consultant)
+    return render_template ('health/detail.html', html=html,index_list=index_list)
 
 
 @health.route ('/delete_case/<id>', methods=['GET', 'POST'])

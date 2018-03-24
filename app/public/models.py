@@ -58,5 +58,6 @@ class Consultant (db.Model):
     phone = db.Column (db.String (), nullable=False)
     status = db.Column (db.String (), nullable=False)
     outer_id = db.Column (db.String (), nullable=False)
+    QuestionModels = db.relationship ('QuestionModel', backref='health_consultant')
     def __repr__(self):
         return self.name
