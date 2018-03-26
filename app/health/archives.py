@@ -1,6 +1,7 @@
 import flask
 from flask import render_template, flash, redirect, url_for, request
 from sqlalchemy import or_
+from app.public.decorators import login_required
 from app.public.exts import db
 from app.public.fenye import Pagination
 from app.public.froms import Interface_yong_Form
@@ -9,7 +10,7 @@ from app.public import config
 from . import health
 
 @health.route ('/detail/')
-# @login_required
+@login_required
 def detail():
     # consultant = Consultant.query.all ()
     resylt = QuestionModel.query.all ()

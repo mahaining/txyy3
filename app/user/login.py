@@ -1,4 +1,5 @@
 from flask import render_template,session
+
 from app.public.decorators import login_required
 from app.public.exts import db
 from app.public.froms import RegistForm
@@ -6,11 +7,11 @@ from app.public.models import User
 from . import user
 import flask
 @user.route ('/index')
-# @login_required
+@login_required
 def index():
     return flask.render_template ('index/index.html')
 @user.route ('/back')
-# @login_required
+@login_required
 def back():
     return flask.render_template ('public/back.html')
 @user.route ('/', methods=['GET', 'POST'])
@@ -68,6 +69,3 @@ def context_processor():
         return {"user": flask.g.user}
     else:
         return {}
-#
-# if __name__ == '__main__':
-#     app.run ()
