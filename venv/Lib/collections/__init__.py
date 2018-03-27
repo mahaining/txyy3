@@ -79,10 +79,10 @@ class _Link(object):
     __slots__ = 'prev', 'next', 'key', '__weakref__'
 
 class OrderedDict(dict):
-    'Dictionary that remembers insertion order'
+    'Dictionary that remembers insertion orders'
     # An inherited dict maps keys to values.
     # The inherited dict provides __getitem__, __len__, __contains__, and get.
-    # The remaining methods are order-aware.
+    # The remaining methods are orders-aware.
     # Big-O running times for all methods are the same as regular dictionaries.
 
     # The internal self.__map dict maps keys to links in a doubly linked list.
@@ -95,7 +95,7 @@ class OrderedDict(dict):
 
     def __init__(*args, **kwds):
         '''Initialize an ordered dictionary.  The signature is the same as
-        regular dictionaries.  Keyword argument order is preserved.
+        regular dictionaries.  Keyword argument orders is preserved.
         '''
         if not args:
             raise TypeError("descriptor '__init__' of 'OrderedDict' object "
@@ -141,7 +141,7 @@ class OrderedDict(dict):
 
     def __iter__(self):
         'od.__iter__() <==> iter(od)'
-        # Traverse the linked list in order.
+        # Traverse the linked list in orders.
         root = self.__root
         curr = root.next
         while curr is not root:
@@ -150,7 +150,7 @@ class OrderedDict(dict):
 
     def __reversed__(self):
         'od.__reversed__() <==> reversed(od)'
-        # Traverse the linked list in reverse order.
+        # Traverse the linked list in reverse orders.
         root = self.__root
         curr = root.prev
         while curr is not root:
@@ -167,7 +167,7 @@ class OrderedDict(dict):
     def popitem(self, last=True):
         '''Remove and return a (key, value) pair from the dictionary.
 
-        Pairs are returned in LIFO order if last is true or FIFO order if false.
+        Pairs are returned in LIFO orders if last is true or FIFO orders if false.
         '''
         if not self:
             raise KeyError('dictionary is empty')
@@ -291,8 +291,8 @@ class OrderedDict(dict):
         return self
 
     def __eq__(self, other):
-        '''od.__eq__(y) <==> od==y.  Comparison to another OD is order-sensitive
-        while comparison to a regular mapping is order-insensitive.
+        '''od.__eq__(y) <==> od==y.  Comparison to another OD is orders-sensitive
+        while comparison to a regular mapping is orders-insensitive.
 
         '''
         if isinstance(other, OrderedDict):
@@ -1195,7 +1195,7 @@ class UserString(_collections_abc.Sequence):
     def __rmod__(self, format):
         return self.__class__(format % args)
 
-    # the following methods are defined in alphabetical order:
+    # the following methods are defined in alphabetical orders:
     def capitalize(self): return self.__class__(self.data.capitalize())
     def casefold(self):
         return self.__class__(self.data.casefold())

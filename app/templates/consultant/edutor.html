@@ -47,7 +47,10 @@
                 <strong>第三方ID:</strong>
                 <input type="text" name="outer_id" value="{{edit.outer_id}}">
             </div>
-            <button type="submit" class="am-btn am-btn-primary">修改</button>
+            <div class="box-footer">
+                <button type="submit" class="am-btn am-btn-primary">修改</button>
+                <a class="am-btn am-btn-primary" href="{{ url_for('consultant.detail', page=page) }}">返回</a>
+            </div>
         </form>
     </div>
 </div>

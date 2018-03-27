@@ -1,0 +1,141 @@
+{#{% extends 'public/base.html' %}#}
+{% extends 'index/index.html' %}
+{%block hello%}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+    </div>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 查看患者档案
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                    <div class="input-icon right">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class='flashes'>
+            {% for message in messages %}
+            <li style="color:red">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('medical.user_view',id=views.id) }}" method="POST">
+            <div class="form-group">
+                <strong>就诊号:</strong>
+                {{views.medical_number}}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>就诊类型:</strong>
+                <!--{{views.medical_type}}-->
+                {% if views.medical_type==0 %}
+                <td>初诊</td>
+                {% elif views.medical_type==1 %}
+                <td>复诊</td>
+                {% elif views.medical_type==2 %}
+                <td>未知</td>
+                {% elif views.medical_type==3 %}
+                <td>未知</td>
+                {% endif %}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>就诊时间:</strong>
+                <td>{{views.medical_time}}
+                <td>
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>主诉:</strong>
+                {{views.complaint}}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>诊断意见:</strong>
+                {{views.diagnostic}}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>治疗意见:</strong>
+                {{views.treatment}}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>患者档案id:</strong>
+                {{views.health_record.real_name}}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>过敏史:</strong>
+                {{views.allergy_history}}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>处方类型:</strong>
+                <!--{{views.prescription_type}}-->
+                {% if views.prescription_type==0 %}
+                <td>普通处方</td>
+                {% elif views.prescription_type==1 %}
+                <td>急诊处方</td>
+                {% endif %}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>存在第三方的医生id:</strong>
+                {{views.outer_doctor_id}}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>存在第三方的患者id:</strong>
+                {{views.outer_health_record_id}}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>存在第三方的病历id:</strong>
+                {{views.outer_id}}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>状态:</strong>
+                <!--{{views.status}}-->
+                {% if views.status==0 %}
+                <td>未开始</td>
+                {% elif views.status==1 %}
+                <td>已登记</td>
+                {% elif views.status==2 %}
+                <td>已挂号</td>
+                {% elif views.status==3 %}
+                <td>已开病历</td>
+                {% elif views.status==4 %}
+                <td>已开方</td>
+                {% elif views.status==5 %}
+                <td>已审方</td>
+                {% elif views.status==6 %}
+                <td>已收费</td>
+                {% elif views.status==7 %}
+                <td>已发药</td>
+                {% elif views.status==10 %}
+                <td>已作废</td>
+                {% elif views.status==11 %}
+                <td>无预约医生</td>
+                {% endif %}
+            </div>
+            <span>&nbsp;</span>
+            <div class="form-group">
+                <strong>修改时间:</strong>
+                {{views.update_at}}
+            </div>
+            <div class="box-footer">
+                <a class="btn btn-default" style="margin-left:10px;color: #367fa9"
+                   href="{{ url_for('medical.detail', page=page) }}">返回</a>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}

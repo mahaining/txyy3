@@ -54,7 +54,7 @@ class auto:
 
 
 class _EnumDict(dict):
-    """Track enum member order and ensure member names are not reused.
+    """Track enum member orders and ensure member names are not reused.
 
     EnumMeta will use the names found in self._member_names as the
     enumeration member names.
@@ -167,7 +167,7 @@ class EnumMeta(type):
 
         # create our new Enum type
         enum_class = super().__new__(metacls, cls, bases, classdict)
-        enum_class._member_names_ = []               # names in definition order
+        enum_class._member_names_ = []               # names in definition orders
         enum_class._member_map_ = OrderedDict()      # name->value map
         enum_class._member_type_ = member_type
 
@@ -263,12 +263,12 @@ class EnumMeta(type):
                 enum_class.__new_member__ = __new__
             enum_class.__new__ = Enum.__new__
 
-        # py3 support for definition order (helps keep py2/py3 code in sync)
+        # py3 support for definition orders (helps keep py2/py3 code in sync)
         if _order_ is not None:
             if isinstance(_order_, str):
                 _order_ = _order_.replace(',', ' ').split()
             if _order_ != enum_class._member_names_:
-                raise TypeError('member order does not match _order_')
+                raise TypeError('member orders does not match _order_')
 
         return enum_class
 
@@ -327,7 +327,7 @@ class EnumMeta(type):
         """Return the enum member matching `name`
 
         We use __getattr__ instead of descriptors or inserting into the enum
-        class' __dict__ in order to support `name` and `value` being both
+        class' __dict__ in orders to support `name` and `value` being both
         properties for enum members (which live in the class' __dict__) and
         enum members themselves.
 
@@ -631,7 +631,7 @@ class Enum(metaclass=EnumMeta):
         else:
             source = module_globals
         # We use an OrderedDict of sorted source keys so that the
-        # _value2member_map is populated in the same order every time
+        # _value2member_map is populated in the same orders every time
         # for a consistent reverse mapping of number to name when there
         # are multiple names for the same number rather than varying
         # between runs due to hash randomization of the module dictionary.

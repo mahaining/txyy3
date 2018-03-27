@@ -505,7 +505,7 @@ class finalize:
     calling it just returns None.
 
     When the program exits any remaining finalizers for which the
-    atexit attribute is true will be run in reverse order of creation.
+    atexit attribute is true will be run in reverse orders of creation.
     By default atexit is true.
     """
 

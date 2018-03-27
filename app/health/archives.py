@@ -1,27 +1,28 @@
+# @File    : medicals.py
+# @author  : jack
+# @software: PyCharm
+# @datetime: 3/27  下午 14:34
 import flask
-from flask import render_template, flash, redirect, url_for, request
+from flask import flash, redirect, url_for, request, render_template
+# from flask_login import login_required
 from sqlalchemy import or_
-from app.public.decorators import login_required
+from app.public.decorators import login_required, admin_login_req
 from app.public.exts import db
 from app.public.fenye import Pagination
 from app.public.froms import Interface_yong_Form
-from app.public.models import QuestionModel, Consultant
+from app.public.models import QuestionModel, Consultant, User
 from app.public import config
 from . import health
 
 @health.route ('/detail/')
 @login_required
 def detail():
-    # consultant = Consultant.query.all ()
-    resylt = QuestionModel.query.all ()
-    # resylt = QuestionModel.query.join(Consultant).filter( QuestionModel.consultant_id == Consultant.id)
+    resylt = QuestionModel.query.all()
     pager_obj = Pagination (request.args.get ("page", 1), len (resylt), request.path, request.args,
                             per_page_count=config.PageShow)
     index_list = resylt[pager_obj.start:pager_obj.end]
     html = pager_obj.page_html ()
-    return render_template ('health/detail.html', html=html,index_list=index_list)
-
-
+    return render_template ('health/detail.html',html = html,index_list=index_list)
 @health.route ('/delete_case/<id>', methods=['GET', 'POST'])
 def delete(id):
     next = request.headers.get ('Referer')
@@ -31,7 +32,6 @@ def delete(id):
     db.session.commit ()
     flash (u'删除成功')
     return redirect (next or url_for ('detail'))
-
 
 @health.route ('/add_case/', methods=['GET', 'POST'])
 def add_case():
@@ -74,7 +74,7 @@ def add_case():
             db.session.rollback ()
             flash (u'添加档案失败')
             return redirect (url_for ('health.detail'))
-    return render_template ('health/add.html', form=form, consultants=consultant)
+    return flask.render_template ('health/add.html', form=form, consultants=consultant)
     # return render_template ('health/add.html', form=form)
 
 
@@ -115,8 +115,8 @@ def editor(id):
         except:
             db.session.rollback ()
             flash (u'编辑失败，请重新编辑！')
-            return render_template ('health/editor.html', edit=edit_case, consultants=consultant)
-    return render_template ('health/editor.html', edit=edit_case, consultants=consultant)
+            return flask.render_template ('health/editor.html', edit=edit_case, consultants=consultant)
+    return flask.render_template ('health/editor.html', edit=edit_case, consultants=consultant)
 
 
 @health.route ('/search/')
@@ -127,3 +127,15 @@ def search():
         'index_list': questions
     }
     return flask.render_template ('health/detail.html', **context)
+@health.before_request
+def before_request():
+    id = flask.session.get('id')
+    if id:
+        user = User.query.get(id)
+        flask.g.user = user
+@health.context_processor
+def context_processor():
+    if hasattr(flask.g,'user'):
+        return {"user":flask.g.user}
+    else:
+        return {}

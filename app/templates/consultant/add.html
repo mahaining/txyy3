@@ -39,8 +39,8 @@
                 </div>
                 <span>&nbsp;</span>
                 <!--<div class="form-group">-->
-                    <!--<strong>状态:</strong>-->
-                    <!--{{ form.status }}-->
+                <!--<strong>状态:</strong>-->
+                <!--{{ form.status }}-->
                 <!--</div>-->
                 <div class="form-group">
                     <!--<strong>性别</strong>-->
@@ -53,7 +53,10 @@
                     <strong>第三方ID:</strong>
                     {{ form.outer_id }}
                 </div>
-                <button type="submit" class="am-btn am-btn-primary">添加</button>
+                <div class="box-footer">
+                    <button type="submit" class="am-btn am-btn-primary">添加</button>
+                    <a class="am-btn am-btn-primary" href="{{ url_for('consultant.detail', page=page) }}">返回</a>
+                </div>
             </div>
         </form>
     </div>

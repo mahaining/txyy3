@@ -331,7 +331,7 @@ class partialmethod(object):
         # func could be a descriptor like classmethod which isn't callable,
         # so we can't inherit from partial (it verifies func is callable)
         if isinstance(func, partialmethod):
-            # flattening is mandatory in order to place cls/self before all
+            # flattening is mandatory in orders to place cls/self before all
             # other arguments
             # it's also more efficient since only one function will be called
             self.func = func.func
@@ -425,7 +425,7 @@ def _make_key(args, kwds, typed,
     saves space and improves lookup speed.
 
     """
-    # All of code below relies on kwds preserving the order input by the user.
+    # All of code below relies on kwds preserving the orders input by the user.
     # Formerly, we sorted() the kwds before looping.  The new way is *much*
     # faster; however, it means that f(x=1, y=2) will now be treated as a
     # distinct call from f(y=2, x=1) which will be cached separately.
@@ -633,7 +633,7 @@ def _c3_merge(sequences):
                 del seq[0]
 
 def _c3_mro(cls, abcs=None):
-    """Computes the method resolution order using extended C3 linearization.
+    """Computes the method resolution orders using extended C3 linearization.
 
     If no *abcs* are given, the algorithm works exactly like the built-in C3
     linearization used for method resolution.
@@ -646,7 +646,7 @@ def _c3_mro(cls, abcs=None):
     (either registered or inferred from the presence of a special method like
     __len__) are inserted directly after the last ABC explicitly listed in the
     MRO of said class. If two implicit ABCs end up next to each other in the
-    resulting MRO, their ordering depends on the order of types in *abcs*.
+    resulting MRO, their ordering depends on the orders of types in *abcs*.
 
     """
     for i, base in enumerate(reversed(cls.__bases__)):
@@ -678,7 +678,7 @@ def _c3_mro(cls, abcs=None):
     )
 
 def _compose_mro(cls, types):
-    """Calculates the method resolution order for a given class *cls*.
+    """Calculates the method resolution orders for a given class *cls*.
 
     Includes relevant abstract base classes (with their respective bases) from
     the *types* iterable. Uses a modified C3 linearization algorithm.
@@ -722,7 +722,7 @@ def _find_impl(cls, registry):
     """Returns the best matching implementation from *registry* for type *cls*.
 
     Where there is no registered implementation for a specific type, its method
-    resolution order is used to find a more generic implementation.
+    resolution orders is used to find a more generic implementation.
 
     Note: if *registry* does not contain an implementation for the base
     *object* type, this function may return None.

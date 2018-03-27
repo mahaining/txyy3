@@ -529,7 +529,7 @@ class Set(Collection):
 
         All sets ought to compare equal if they contain the same
         elements, regardless of how they are implemented, and
-        regardless of the order of the elements; so there's not much
+        regardless of the orders of the elements; so there's not much
         freedom for __eq__ or __hash__.  We match the algorithm used
         by the built-in frozenset type.
         """

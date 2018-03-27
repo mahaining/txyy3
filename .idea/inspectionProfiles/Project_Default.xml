@@ -18,6 +18,7 @@
           <option value="manages.*" />
           <option value="manage.flask_scmript" />
           <option value="decorators.login_required" />
+          <option value="app.public.login_manager" />
         </list>
       </option>
     </inspection_tool>

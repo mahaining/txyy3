@@ -1,15 +1,20 @@
+# @File    : medicals.py
+# @author  : jack
+# @software: PyCharm
+# @datetime: 3/27  下午 14:34
 import flask
 from flask import render_template, flash, redirect, url_for, request
 from sqlalchemy import or_
 from app.public import config
+from app.public.decorators import login_required
 from app.public.fenye import Pagination
 from app.public.froms import Interface_consultant
-from app.public.models import Consultant, QuestionModel
+from app.public.models import Consultant, User
 from . import consultant
 from app.public.exts import db
 
 @consultant.route ('/detail2/')
-# @login_required
+@login_required
 def detail():
     resylt = Consultant.query.all()
     pager_obj = Pagination (request.args.get ("page", 1), len (resylt), request.path, request.args,
@@ -89,3 +94,15 @@ def search():
         'index_list': questions
     }
     return flask.render_template ('consultant/detail.html', **context)
+@consultant.before_request
+def before_request():
+    id = flask.session.get('id')
+    if id:
+        user = User.query.get(id)
+        flask.g.user = user
+@consultant.context_processor
+def context_processor():
+    if hasattr(flask.g,'user'):
+        return {"user":flask.g.user}
+    else:
+        return {}

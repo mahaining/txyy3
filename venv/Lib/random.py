@@ -286,7 +286,7 @@ class Random(_random.Random):
 
         Returns a new list containing elements from the population while
         leaving the original population unchanged.  The resulting list is
-        in selection order so that all sub-slices will also be valid random
+        in selection orders so that all sub-slices will also be valid random
         samples.  This allows raffle winners (the sample) to be partitioned
         into grand prize and second place winners (the subslices).
 

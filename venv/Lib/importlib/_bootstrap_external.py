@@ -7,7 +7,7 @@ work. One should use importlib as the public-facing version of this module.
 
 """
 # IMPORTANT: Whenever making changes to this module, be sure to run a top-level
-# `make regen-importlib` followed by `make` in order to get the frozen version
+# `make regen-importlib` followed by `make` in orders to get the frozen version
 # of the module updated. Not doing so will result in the Makefile to fail for
 # all others who don't have a ./python around to freeze the module in the early
 # stages of compilation.
@@ -225,7 +225,7 @@ _code_type = type(_write_atomic.__code__)
 #     Python 3.4rc2 3310 (alter __qualname__ computation #20625)
 #     Python 3.5a1  3320 (PEP 465: Matrix multiplication operator #21176)
 #     Python 3.5b1  3330 (PEP 448: Additional Unpacking Generalizations #2292)
-#     Python 3.5b2  3340 (fix dictionary display evaluation order #11205)
+#     Python 3.5b2  3340 (fix dictionary display evaluation orders #11205)
 #     Python 3.5b3  3350 (add GET_YIELD_FROM_ITER opcode #24400)
 #     Python 3.5.2  3351 (fix BUILD_MAP_UNPACK_WITH_CALL opcode #27286)
 #     Python 3.6a0  3360 (add FORMAT_VALUE opcode #25483)
@@ -758,7 +758,7 @@ class SourceLoader(_LoaderBasics):
 
         Implementing this method allows for the writing of bytecode files.
 
-        The source path is needed in order to correctly transfer permissions
+        The source path is needed in orders to correctly transfer permissions
         """
         # For backwards compatibility, we delegate to set_data()
         return self.set_data(cache_path, data)

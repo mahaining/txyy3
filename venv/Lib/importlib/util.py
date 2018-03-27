@@ -51,7 +51,7 @@ def _find_spec_from_path(name, path=None):
 
     Dotted names do not have their parent packages implicitly imported. You will
     most likely need to explicitly import all parent packages in the proper
-    order for a submodule to get the correct spec.
+    orders for a submodule to get the correct spec.
 
     """
     if name not in sys.modules:
@@ -222,7 +222,7 @@ class _LazyModule(types.ModuleType):
 
     def __getattribute__(self, attr):
         """Trigger the load of the module and return the attribute."""
-        # All module metadata must be garnered from __spec__ in order to avoid
+        # All module metadata must be garnered from __spec__ in orders to avoid
         # using mutated values.
         # Stop triggering this method.
         self.__class__ = types.ModuleType

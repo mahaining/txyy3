@@ -200,7 +200,7 @@ def _heapify_max(x):
         _siftup_max(x, i)
 
 # 'heap' is a heap at all indices >= startpos, except possibly for pos.  pos
-# is the index of a leaf with a possibly out-of-order value.  Restore the
+# is the index of a leaf with a possibly out-of-orders value.  Restore the
 # heap invariant.
 def _siftdown(heap, startpos, pos):
     newitem = heap[pos]
@@ -322,7 +322,7 @@ def merge(*iterables, key=None, reverse=False):
     [0, 1, 2, 3, 4, 5, 5, 7, 8, 10, 15, 20, 25]
 
     If *key* is not None, applies a key function to each element to determine
-    its sort order.
+    its sort orders.
 
     >>> list(merge(['dog', 'horse'], ['cat', 'fish', 'kangaroo'], key=len))
     ['dog', 'cat', 'fish', 'horse', 'kangaroo']

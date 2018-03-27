@@ -1,0 +1,99 @@
+{#{% extends 'public/base.html' %}#}
+{% extends 'index/index.html' %}
+{% block hello %}
+<div class="tpl-content-wrapper">
+    <div class="tpl-content-page-title">
+    </div>
+    <div class="tpl-portlet-components">
+        <div class="portlet-title">
+            <div class="caption font-green bold">
+                <span class="am-icon-code"></span> 添加患者档案
+            </div>
+            <div class="tpl-portlet-input tpl-fz-ml">
+                <div class="portlet-input input-small input-inline">
+                    <div class="input-icon right">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% with messages = get_flashed_messages()%}
+        {% if messages%}
+        <ul class='flashes'>
+            {% for message in messages %}
+            <li style="color:red">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="{{url_for('health.add_case')}}">
+            {# {{form.hidden_tag()}}#}
+            {# {{form.csrf_token}}#}
+            <div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>用户ID</strong>
+                    {{ form.user_id }}
+                </div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>手机号:</strong>
+                    {{ form.mobile }}
+                </div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>姓名:</strong>
+                    {{ form.real_name }}
+                </div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>身份证:</strong>
+                    {{ form.id_card }}
+                </div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>年龄:</strong>
+                    {{ form.age }}
+                </div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <!--<strong>性别</strong>-->
+                    <input id="sex" type="radio" name="sex" value="1">男
+                    <input id="sex1" type="radio" name="sex" value="2">女
+                    <!--{{form.sex}}-->
+                </div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>体重:</strong>
+                    {{ form.weight }}
+                </div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>身高:</strong>
+                    {{ form.height }}
+                </div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>备注:</strong>
+                    {{ form.remark }}
+                </div>
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>医顾:</strong>
+                    <!--{{ form.consultant_id }}-->
+                    <select name='consultant'>{%for work in consultants%}
+                        <option value="{{work.id}}">{{work.name}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <span>&nbsp;</span>
+                <div class="form-group">
+                    <strong>第三方ID:</strong>
+                    {{ form.outer_id }}
+                </div>
+                <button type="submit" class="am-btn am-btn-primary">添加</button>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}
