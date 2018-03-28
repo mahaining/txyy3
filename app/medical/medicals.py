@@ -30,7 +30,6 @@ def user_view(id):
 def delete(id):
     next = request.headers.get ('Referer')
     testcase = Medical.query.filter_by (id=id).first ()
-    # testcase.status = True
     db.session.delete (testcase)
     db.session.commit ()
     flash (u'删除成功')
