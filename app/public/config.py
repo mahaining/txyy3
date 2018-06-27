@@ -1,10 +1,10 @@
 import os
 
-HOSTNAME = '120.78.206.186'
+HOSTNAME = 'xxx'
 PORT = '3306'
-DATABASE = 'txyy_customer'
-USERNAME = 'tecker'
-PASSWORD = 'tck@2017'
+DATABASE = 'xxx'
+USERNAME = 'xxx'
+PASSWORD = 'xxx'
 DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format (USERNAME, PASSWORD, HOSTNAME, PORT, DATABASE)
 SQLALCHEMY_DATABASE_URI = DB_URI
 DEBUG = True
